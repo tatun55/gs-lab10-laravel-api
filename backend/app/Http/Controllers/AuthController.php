@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegistUserRequest;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -14,7 +16,19 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'regist']]);
+    }
+
+    public function regist(RegistUserRequest $request)
+    {
+        $user = new User();
+        $user->fill($request->validated());
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        $token = auth()->login($user);
+
+        return $this->respondWithToken($token);
     }
 
     /**
