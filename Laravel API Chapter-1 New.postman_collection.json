@@ -38,13 +38,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/auth/regist",
+							"raw": "http://localhost/api/v1/auth/regist",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
+								"v1",
 								"auth",
 								"regist"
 							]
@@ -82,13 +83,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/auth/login",
+							"raw": "http://localhost/api/v1/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
+								"v1",
 								"auth",
 								"login"
 							]
@@ -123,13 +125,14 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/auth/logout",
+							"raw": "http://localhost/api/v1/auth/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
+								"v1",
 								"auth",
 								"logout"
 							]
@@ -177,13 +180,14 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost/api/auth/refresh",
+							"raw": "http://localhost/api/v1/auth/refresh",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
+								"v1",
 								"auth",
 								"refresh"
 							]
@@ -230,13 +234,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/auth/me",
+							"raw": "http://localhost/api/v1/auth/me",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
+								"v1",
 								"auth",
 								"me"
 							]
