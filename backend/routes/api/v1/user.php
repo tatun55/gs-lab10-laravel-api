@@ -22,3 +22,9 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
 });
+
+Route::group([
+    'middleware' => 'auth:api'
+], function () {
+    Route::apiResource('addresses', 'AddressController');
+});
