@@ -16,7 +16,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        Auth()->user()->role !== 'admin' && abort(403);
         return Product::orderBy('id', 'asc')->paginate(20);
     }
 
@@ -28,7 +27,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        Auth()->user()->role !== 'admin' && abort(403);
         $product = new Product();
         $product->fill($request->validated())->save();
         return $product;
@@ -42,7 +40,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        Auth()->user()->role !== 'admin' && abort(403);
         return $product;
     }
 
@@ -55,7 +52,6 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        Auth()->user()->role !== 'admin' && abort(403);
         $product->fill($request->validated())->save();
         return $product;
     }
@@ -68,7 +64,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        Auth()->user()->role !== 'admin' && abort(403);
         $product->delete();
         return response()->json(['message' => 'Deleted.']);
     }
