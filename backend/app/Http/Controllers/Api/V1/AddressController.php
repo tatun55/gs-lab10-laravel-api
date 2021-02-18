@@ -9,6 +9,11 @@ use App\Http\Requests\AddressRequest;
 
 class AddressController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Address::class, 'address', ['except' => ['index', 'store']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +46,6 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        $address->user_id !== Auth()->user()->id && abort(403);
         return $address;
     }
 
@@ -54,7 +58,6 @@ class AddressController extends Controller
      */
     public function update(AddressRequest $request, Address $address)
     {
-        $address->user_id !== Auth()->user()->id && abort(403);
         $address->fill($request->validated())->save();
         return $address;
     }
@@ -67,7 +70,6 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        $address->user_id !== Auth()->user()->id && abort(403);
         $address->delete();
         return response()->json(['message' => 'Deleted.']);
     }
