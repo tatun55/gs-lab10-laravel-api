@@ -99,6 +99,51 @@
 					"response": []
 				},
 				{
+					"name": "login (admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Auto Set access_token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var access_token = jsonData.access_token;",
+									"    pm.environment.set(\"token\", access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@dummy.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "logout",
 					"event": [
 						{
@@ -244,6 +289,931 @@
 								"v1",
 								"auth",
 								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/addresses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"zip_code\": \"3333333\",\n    \"pref\": \"東京都\",\n    \"city\": \"港区\",\n    \"street\": \"六本木1-1-1 六本木ビル101\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/addresses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"zip_code\": \"3333331\",\n    \"pref\": \"東京都\",\n    \"city\": \"港区\",\n    \"street\": \"六本木1-1-1 六本木ビル101\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/v1/admin/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"商品名ああああ\",\n    \"desc\": \"これは商品名です。これは商品名です。これは商品名です。\",\n    \"price\": \"55555\",\n    \"stock\": \"10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/admin/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "store",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\" : \"商品名ああああ\",\n    \"desc\" : \"これは商品名です。これは商品名です。これは商品名です。\",\n    \"img_url\" : \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n    \"price\" : 5555,\n    \"stock\" : 10,\n    \"is_public\" : 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/api/{{ver}}/admin/{{model}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"{{ver}}",
+												"admin",
+												"{{model}}"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.18.0"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.1"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 06 Feb 2021 09:23:48 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "57"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"商品名ああああ\",\n    \"desc\": \"これは商品名です。これは商品名です。これは商品名です。\",\n    \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n    \"price\": 5555,\n    \"stock\": 10,\n    \"is_public\": 1,\n    \"updated_at\": \"2021-02-06 09:23:48\",\n    \"created_at\": \"2021-02-06 09:23:48\",\n    \"id\": 102\n}"
+								}
+							]
+						},
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/v1/addresses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"商品名いいいい\",\n    \"desc\": \"これは商品名です。これは商品名です。これは商品名です。\",\n    \"price\": \"55555\",\n    \"stock\": \"10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/v1/admin/products/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/v1/addresses/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"v1",
+										"addresses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "商品名99",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "index",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/{{ver}}/{{model}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"{{ver}}",
+										"{{model}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.18.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Feb 2021 08:39:40 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"current_page\": 1,\n    \"data\": [\n        {\n            \"id\": 7,\n            \"name\": \"商品名7\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 84646\n        },\n        {\n            \"id\": 10,\n            \"name\": \"商品名10\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 97495\n        },\n        {\n            \"id\": 11,\n            \"name\": \"商品名11\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 91404\n        },\n        {\n            \"id\": 18,\n            \"name\": \"商品名18\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 91931\n        },\n        {\n            \"id\": 19,\n            \"name\": \"商品名19\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 27377\n        },\n        {\n            \"id\": 23,\n            \"name\": \"商品名23\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 79715\n        },\n        {\n            \"id\": 24,\n            \"name\": \"商品名24\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 68126\n        },\n        {\n            \"id\": 25,\n            \"name\": \"商品名25\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 21198\n        },\n        {\n            \"id\": 26,\n            \"name\": \"商品名26\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 97746\n        },\n        {\n            \"id\": 30,\n            \"name\": \"商品名30\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 89455\n        },\n        {\n            \"id\": 31,\n            \"name\": \"商品名31\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 52671\n        },\n        {\n            \"id\": 32,\n            \"name\": \"商品名32\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 29432\n        },\n        {\n            \"id\": 33,\n            \"name\": \"商品名33\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 12037\n        },\n        {\n            \"id\": 34,\n            \"name\": \"商品名34\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 2034\n        },\n        {\n            \"id\": 35,\n            \"name\": \"商品名35\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 91694\n        },\n        {\n            \"id\": 37,\n            \"name\": \"商品名37\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 58480\n        },\n        {\n            \"id\": 40,\n            \"name\": \"商品名40\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 30423\n        },\n        {\n            \"id\": 41,\n            \"name\": \"商品名41\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 53391\n        },\n        {\n            \"id\": 42,\n            \"name\": \"商品名42\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 69470\n        },\n        {\n            \"id\": 43,\n            \"name\": \"商品名43\",\n            \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n            \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n            \"price\": 54105\n        }\n    ],\n    \"first_page_url\": \"http://localhost/api/v1/products?page=1\",\n    \"from\": 1,\n    \"last_page\": 3,\n    \"last_page_url\": \"http://localhost/api/v1/products?page=3\",\n    \"next_page_url\": \"http://localhost/api/v1/products?page=2\",\n    \"path\": \"http://localhost/api/v1/products\",\n    \"per_page\": 20,\n    \"prev_page_url\": null,\n    \"to\": 20,\n    \"total\": 46\n}"
+						}
+					]
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "show",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/{{ver}}/{{model}}/7",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"{{ver}}",
+										"{{model}}",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.18.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Feb 2021 08:39:49 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "56"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 7,\n    \"name\": \"商品名7\",\n    \"desc\": \"これは商品の説明です。これは商品の説明です。これは商品の説明です。\",\n    \"img_url\": \"https://dummyimage.com/300x300/cccccc/ffffff&text=ダミー画像\",\n    \"price\": 84646\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"model\", \"products\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/products/1/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"1",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/products/1/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"1",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/products/2/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"2",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"model\", \"cart\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "purchase",
+			"item": [
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/purchase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"purchase"
 							]
 						}
 					},
