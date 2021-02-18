@@ -33,4 +33,5 @@ Route::group([
     Route::post('products/{product}/cart', 'CartController@store');
     Route::put('products/{product}/cart', 'CartController@update');
     Route::delete('products/{product}/cart', 'CartController@destroy');
+    Route::post('purchase', 'PurchaseController@store');
 });
