@@ -29,4 +29,8 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::apiResource('addresses', 'AddressController');
+    Route::get('cart', 'CartController@index');
+    Route::post('products/{product}/cart', 'CartController@store');
+    Route::put('products/{product}/cart', 'CartController@update');
+    Route::delete('products/{product}/cart', 'CartController@destroy');
 });
